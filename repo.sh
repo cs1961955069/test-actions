@@ -65,9 +65,7 @@ cp scripts/baetyl.plist example/docker/etc/baetyl
 tar cvzf docker_example.tar.gz -C example/docker etc var
 mkdir -p $PARENT_PATH/example/$VERSION/docker
 cp docker_example.tar.gz $PARENT_PATH/example/$VERSION/docker
-# 有残留
 cp -r $PARENT_PATH/example/$VERSION $PARENT_PATH/example/latest
-echo 
 
 # cp scripts/install.sh $PARENT_PATH
 # cp scripts/install_with_docker_example.sh $PARENT_PATH
