@@ -54,17 +54,18 @@ mkdir bin && cp baetyl bin
 mkdir -p etc/baetyl && cp example/docker/etc/baetyl/conf.yml etc/baetyl && cp scripts/baetyl.plist etc/baetyl
 sed -i "s/level: debug//g;" etc/baetyl/conf.yml
 tar cvzf baetyl-$VERSION-darwin-amd64.tar.gz bin etc
-mkdir -p $PARENT_PATH/mac/static/x86_64 && cp baetyl-$VERSION-darwin-amd64.tar.gz $PARENT_PATH/mac/static/x86_64
-ln -s $PARENT_PATH/mac/static/x86_64/baetyl-$VERSION-darwin-amd64.tar.gz $PARENT_PATH/mac/static/x86_64/baetyl-latest-darwin-amd64.tar.gz
+mkdir -p $PARENT_PATH/mac/static/x86_64
+cp baetyl-$VERSION-darwin-amd64.tar.gz $PARENT_PATH/mac/static/x86_64
+cp baetyl-$VERSION-darwin-amd64.tar.gz $PARENT_PATH/mac/static/x86_64/baetyl-latest-darwin-amd64.tar.gz
 
 # example zip
  && cd $PARENT_PATH/example/$VERSION/docker
 cp scripts/baetyl.plist example/docker/etc/baetyl
 #mkdir -p example/docker/var/log/baetyl
 tar cvzf docker_example.tar.gz -C example/docker etc var
-mkdir -p $PARENT_PATH/example/$VERSION/docker && cp docker_example.tar.gz 
-cd $PARENT_PATH/example
-ln -s $VERSION latest
+mkdir -p $PARENT_PATH/example/$VERSION/docker
+cp docker_example.tar.gz $PARENT_PATH/example/$VERSION/docker
+cp -r $PARENT_PATH/example/$VERSION $PARENT_PATH/example/latest
 
 # cp scripts/install.sh $PARENT_PATH
 # cp scripts/install_with_docker_example.sh $PARENT_PATH
