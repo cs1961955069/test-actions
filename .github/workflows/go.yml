@@ -16,8 +16,7 @@ jobs:
           chmod +x repo.sh
           sudo ./repo.sh
           ls ~/.aptly/public
-          ls /home/runner/work/.aptly/public
       - uses: actions/upload-artifact@v1
         with:
           name: baetyl-repo
-          path: /home/runner/work/.aptly/public
+          path: /home/runner/.aptly/public/
