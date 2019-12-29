@@ -18,7 +18,9 @@ jobs:
           ls ~/.aptly/public
       - id: path
         run: echo ::set-output name=path::$(ls ~)/.aptly/public
+     - name: test
+        run: echo ${{ steps.path.outputs.path }}
       - uses: actions/upload-artifact@v1
         with:
-          name: baetyl-i386
+          name: baetyl-repo
           path: ${{ steps.path.outputs.path }}
