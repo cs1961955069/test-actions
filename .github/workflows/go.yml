@@ -12,6 +12,6 @@ jobs:
           sudo apt update
           sudo apt-get install -y lsb-release dpkg gnupg gnupg2 aptly ca-certificates createrepo
           echo "${{ secrets.KEY_PRIVATE }}" >private.key
-          sed -i "s/@version@/2.0.0/g; s/@revision@/1/g; s/@passphrase@/${{ secrets.PASSPHRASE }}/g;" repo.sh
+          sed -i "s/@version@/4.0.0/g; s/@revision@/1/g; s/@passphrase@/${{ secrets.PASSPHRASE }}/g;" repo.sh
           chmod +x repo.sh
           sudo ./repo.sh
