@@ -47,29 +47,24 @@ mkdir -p $PARENT_PATH/linux/centos/7/x86_64/RPMS
 cp baetyl-$VERSION-$REVERSION.el7.x86_64.rpm $PARENT_PATH/linux/centos/7/x86_64/RPMS
 pushd $PARENT_PATH/linux/centos/7
 createrepo x86_64
-pwd
 popd
 
-# # mac zip
-# mkdir -p $PARENT_PATH/mac/static/x86_64 && cd $PARENT_PATH/mac/static/x86_64
-# mkdir bin etc && mkdir etc/baetyl
-# cp /baetyl/output/darwin/amd64/baetyl/bin/baetyl bin
-# cp /baetyl/example/docker/etc/baetyl/conf.yml etc/baetyl
-# sed -i "s/level: debug//g;" etc/baetyl/conf.yml
-# cp /baetyl/scripts/baetyl.plist etc/baetyl
-# tar cvzf baetyl-$VERSION-darwin-amd64.tar.gz bin etc
-# rm -rf bin etc
-# ln -s baetyl-$VERSION-darwin-amd64.tar.gz baetyl-latest-darwin-amd64.tar.gz
+# mac zip
+mkdir bin && cp baetyl bin
+mkdir -p etc/baetyl && cp example/docker/etc/baetyl/conf.yml etc/baetyl && cp scripts/baetyl.plist etc/baetyl
+sed -i "s/level: debug//g;" etc/baetyl/conf.yml
+tar cvzf baetyl-$VERSION-darwin-amd64.tar.gz bin etc
+mkdir -p $PARENT_PATH/mac/static/x86_64 && cp baetyl-$VERSION-darwin-amd64.tar.gz $PARENT_PATH/mac/static/x86_64
+ln -s $PARENT_PATH/mac/static/x86_64/baetyl-$VERSION-darwin-amd64.tar.gz $PARENT_PATH/mac/static/x86_64/baetyl-latest-darwin-amd64.tar.gz
 
-# # example zip
-# mkdir -p $PARENT_PATH/example/$VERSION/docker && cd $PARENT_PATH/example/$VERSION/docker
-# cp -r /baetyl/example/docker/* .
-# cp scripts/baetyl.plist etc/baetyl
-# mkdir -p var/log/baetyl
-# tar cvzf docker_example.tar.gz etc var
-# rm -rf etc var
-# cd $PARENT_PATH/example
-# ln -s $VERSION latest
+# example zip
+ && cd $PARENT_PATH/example/$VERSION/docker
+cp scripts/baetyl.plist example/docker/etc/baetyl
+#mkdir -p example/docker/var/log/baetyl
+tar cvzf docker_example.tar.gz -C example/docker etc var
+mkdir -p $PARENT_PATH/example/$VERSION/docker && cp docker_example.tar.gz 
+cd $PARENT_PATH/example
+ln -s $VERSION latest
 
 # cp scripts/install.sh $PARENT_PATH
 # cp scripts/install_with_docker_example.sh $PARENT_PATH
