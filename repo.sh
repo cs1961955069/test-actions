@@ -47,6 +47,7 @@ mkdir -p $PARENT_PATH/linux/centos/7/x86_64/RPMS
 cp baetyl-$VERSION-$REVERSION.el7.x86_64.rpm $PARENT_PATH/linux/centos/7/x86_64/RPMS
 pushd $PARENT_PATH/linux/centos/7
 createrepo x86_64
+pwd
 popd
 
 # # mac zip
