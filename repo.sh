@@ -70,8 +70,8 @@ popd
 # cd $PARENT_PATH/example
 # ln -s $VERSION latest
 
-cp scripts/install.sh $PARENT_PATH
-cp scripts/install_with_docker_example.sh $PARENT_PATH
+# cp scripts/install.sh $PARENT_PATH
+# cp scripts/install_with_docker_example.sh $PARENT_PATH
 
 ls $PARENT_PATH
 exit $?
