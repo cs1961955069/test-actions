@@ -73,5 +73,4 @@ popd
 # cp scripts/install.sh $PARENT_PATH
 # cp scripts/install_with_docker_example.sh $PARENT_PATH
 
-ls $PARENT_PATH
 exit $?
