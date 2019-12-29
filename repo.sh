@@ -45,9 +45,9 @@ repo_publish
 
 mkdir -p $PARENT_PATH/linux/centos/7/x86_64/RPMS
 cp baetyl-$VERSION-$REVERSION.el7.x86_64.rpm $PARENT_PATH/linux/centos/7/x86_64/RPMS
-
-cd $PARENT_PATH/linux/centos/7
+pushd $PARENT_PATH/linux/centos/7
 createrepo x86_64
+popd
 
 # # mac zip
 # mkdir -p $PARENT_PATH/mac/static/x86_64 && cd $PARENT_PATH/mac/static/x86_64
@@ -70,7 +70,8 @@ createrepo x86_64
 # cd $PARENT_PATH/example
 # ln -s $VERSION latest
 
-# cp scripts/install.sh $PARENT_PATH
-# cp scripts/install_with_docker_example.sh $PARENT_PATH
+cp scripts/install.sh $PARENT_PATH
+cp scripts/install_with_docker_example.sh $PARENT_PATH
 
+ls $PARENT_PATH
 exit $?
