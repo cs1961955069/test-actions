@@ -16,7 +16,9 @@ jobs:
           chmod +x repo.sh
           sudo ./repo.sh
           ls ~/.aptly/public
+      - id: path
+        run: echo ::set-output name=path::$(ls ~)/.aptly/public
       - uses: actions/upload-artifact@v1
         with:
-          name: baetyl-repo
-          path: $(ls ~)/.aptly/public
+          name: baetyl-i386
+          path: ${{ steps.path.outputs.path }}
