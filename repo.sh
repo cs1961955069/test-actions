@@ -28,7 +28,7 @@ repo_publish() {
     ubuntu_dist=("artful" "bionic" "cosmic" "disco" "trusty" "xenial" "yakkety" "zesty")
     for dist in ${ubuntu_dist[@]}; do
         aptly repo create -architectures amd64,arm64,i386,armhf -comment "baetyl ubuntu $dist" -component main -distribution ${dist} baetyl_ubuntu_$dist
-        aptly repo add baetyl_debian_$dist baetyl_$VERSION-$REVERSION_*.deb
+        aptly repo add baetyl_ubuntu_$dist baetyl_$VERSION-$REVERSION_*.deb
         aptly publish repo -gpg-key="$KEY_NAME" -passphrase="$PASSPHRASE" -batch baetyl_ubuntu_$dist linux/ubuntu
     done
 
@@ -36,7 +36,7 @@ repo_publish() {
     raspbian_dist=("buster" "jessie" "stretch")
     for dist in ${raspbian_dist[@]}; do
         aptly repo create -architectures amd64,arm64,i386,armhf -comment "baetyl raspbian $dist" -component main -distribution ${dist} baetyl_raspbian_$dist
-        aptly repo add baetyl_debian_$dist baetyl_$VERSION-$REVERSION_*.deb
+        aptly repo add baetyl_raspbian_$dist baetyl_$VERSION-$REVERSION_*.deb
         aptly publish repo -gpg-key="$KEY_NAME" -passphrase="$PASSPHRASE" -batch baetyl_raspbian_$dist linux/raspbian
     done
 }
