@@ -3,7 +3,7 @@ set -e
 
 KEY_NAME=baetyl
 PASSPHRASE=@passphrase@
-PARENT_PATH=/root/.aptly/public
+PARENT_PATH=~/.aptly/public
 VERSION=@version@
 REVERSION=@revision@
 
@@ -14,52 +14,30 @@ echo 'cert-digest-algo SHA512'>>~/.gnupg/gpg.conf
 echo 'default-preference-list SHA512 SHA384 SHA256 SHA224 AES256 AES192 AES CAST5 ZLIB BZIP2 ZIP Uncompressed'>>~/.gnupg/gpg.conf
 
 repo_publish() {
-
     REPO_LIST=$(aptly repo list)
 
     # publish debian
     debian_dist=("buster" "jessie" "stretch" "wheezy")
-
     for dist in ${debian_dist[@]}; do
-        if [[ -z $(echo $REPO_LIST | grep baetyl_debian_$dist) ]]; then
-            aptly repo create -architectures amd64,arm64,i386,armhf -comment "baetyl debian $dist" -component main -distribution ${dist} baetyl_debian_$dist
-        fi
+        aptly repo create -architectures amd64,arm64,i386,armhf -comment "baetyl debian $dist" -component main -distribution ${dist} baetyl_debian_$dist
         aptly repo add baetyl_debian_$dist baetyl_$VERSION-$REVERSION_*.deb
-        if [[ -z $(aptly publish list | grep linux/debian/$dist) ]]; then
-            aptly publish repo -gpg-key="$KEY_NAME" -passphrase="$PASSPHRASE" baetyl_debian_$dist linux/debian
-        else
-            aptly publish update -gpg-key="$KEY_NAME" -passphrase="$PASSPHRASE" ${dist} linux/debian
-        fi
+        aptly publish repo -gpg-key="$KEY_NAME" -passphrase="$PASSPHRASE" -batch baetyl_debian_$dist linux/debian
     done
 
     # publish ubuntu
     ubuntu_dist=("artful" "bionic" "cosmic" "disco" "trusty" "xenial" "yakkety" "zesty")
-
     for dist in ${ubuntu_dist[@]}; do
-        if [[ -z $(echo $REPO_LIST | grep baetyl_ubuntu_$dist) ]]; then
-            aptly repo create -architectures amd64,arm64,i386,armhf -comment "baetyl ubuntu $dist" -component main -distribution ${dist} baetyl_ubuntu_$dist
-        fi
+        aptly repo create -architectures amd64,arm64,i386,armhf -comment "baetyl ubuntu $dist" -component main -distribution ${dist} baetyl_ubuntu_$dist
         aptly repo add baetyl_debian_$dist baetyl_$VERSION-$REVERSION_*.deb
-        if [[ -z $(aptly publish list | grep linux/ubuntu/$dist) ]]; then
-            aptly publish repo -gpg-key="$KEY_NAME" -passphrase="$PASSPHRASE" baetyl_ubuntu_$dist linux/ubuntu
-        else
-            aptly publish update -gpg-key="$KEY_NAME" -passphrase="$PASSPHRASE" ${dist} linux/ubuntu
-        fi
+        aptly publish repo -gpg-key="$KEY_NAME" -passphrase="$PASSPHRASE" -batch baetyl_ubuntu_$dist linux/ubuntu
     done
 
     # publish raspbian
     raspbian_dist=("buster" "jessie" "stretch")
-
     for dist in ${raspbian_dist[@]}; do
-        if [[ -z $(echo $REPO_LIST | grep baetyl_raspbian_$dist) ]]; then
-            aptly repo create -architectures amd64,arm64,i386,armhf -comment "baetyl raspbian $dist" -component main -distribution ${dist} baetyl_raspbian_$dist
-        fi
+        aptly repo create -architectures amd64,arm64,i386,armhf -comment "baetyl raspbian $dist" -component main -distribution ${dist} baetyl_raspbian_$dist
         aptly repo add baetyl_debian_$dist baetyl_$VERSION-$REVERSION_*.deb
-        if [[ -z $(aptly publish list | grep linux/raspbian/$dist) ]]; then
-            aptly publish repo -gpg-key="$KEY_NAME" -passphrase="$PASSPHRASE" baetyl_raspbian_$dist linux/raspbian
-        else
-            aptly publish update -gpg-key="$KEY_NAME" -passphrase="$PASSPHRASE" ${dist} linux/raspbian
-        fi
+        aptly publish repo -gpg-key="$KEY_NAME" -passphrase="$PASSPHRASE" -batch baetyl_raspbian_$dist linux/raspbian
     done
 }
 
