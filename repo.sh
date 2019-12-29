@@ -49,7 +49,7 @@ pushd $PARENT_PATH/linux/centos/7
 createrepo x86_64
 popd
 
-# mac zip
+# mac
 mkdir bin && cp baetyl bin
 mkdir -p etc/baetyl && cp example/docker/etc/baetyl/conf.yml etc/baetyl && cp scripts/baetyl.plist etc/baetyl
 sed -i "s/level: debug//g;" etc/baetyl/conf.yml
@@ -58,7 +58,7 @@ mkdir -p $PARENT_PATH/mac/static/x86_64
 cp baetyl-$VERSION-darwin-amd64.tar.gz $PARENT_PATH/mac/static/x86_64
 cp baetyl-$VERSION-darwin-amd64.tar.gz $PARENT_PATH/mac/static/x86_64/baetyl-latest-darwin-amd64.tar.gz
 
-# example zip
+# example
 cp scripts/baetyl.plist example/docker/etc/baetyl
 mkdir -p example/docker/var/log/baetyl example/docker/var/lib/baetyl
 tar cvzf docker_example.tar.gz -C example/docker etc var
@@ -66,6 +66,7 @@ mkdir -p $PARENT_PATH/example/$VERSION/docker
 cp docker_example.tar.gz $PARENT_PATH/example/$VERSION/docker
 cp -r $PARENT_PATH/example/$VERSION $PARENT_PATH/example/latest
 
+# install
 cp scripts/install.sh $PARENT_PATH
 cp scripts/install_with_docker_example.sh $PARENT_PATH
 
