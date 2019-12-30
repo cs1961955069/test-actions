@@ -12,13 +12,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    - name: test
+      run: ls
     - name: Build
       run: echo "build"
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v1-release
       with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: target/release/a.tar.gz
+        repo_token: ${{ secrets.TOKEN }}
+        file: a.tar.gz
         asset_name: a.tar.gz
         tag: ${{ github.ref }}
         overwrite: true
