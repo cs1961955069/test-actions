@@ -18,6 +18,7 @@ jobs:
       run: |
         echo "build"
         echo ${{ github.ref }}
+        echo $(echo ${GITHUB_REF:10})
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v1-release
       with:
