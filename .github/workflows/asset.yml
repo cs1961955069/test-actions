@@ -2,8 +2,8 @@ name: asset
 
 on:
   push:
-    tags:
-      - '*'
+#     tags:
+#       - '*'
 
 jobs:
   build:
