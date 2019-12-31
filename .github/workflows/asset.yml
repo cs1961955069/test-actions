@@ -27,3 +27,11 @@ jobs:
         asset_name: a.tar.gz
         tag: ${{ github.ref }}
         overwrite: true
+        
+  test:
+      name: test windows docker
+      runs-on: ubuntu-latest
+      steps:
+      - name: test
+        run: docker version
+      
